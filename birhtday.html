@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Surprise 🎂</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe Script', cursive;
+    background: linear-gradient(135deg, #f8c8dc, #fddde6);
+    overflow: hidden;
+}
+
+/* Center */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Card */
+.card {
+    background: #ffc0cb;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+/* Photo Frame */
+.photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid white;
+    object-fit: cover;
+    box-shadow: 0 0 20px rgba(255,255,255,0.8);
+    margin-bottom: 20px;
+    transition: 0.3s;
+}
+
+.photo:hover {
+    transform: scale(1.1);
+}
+
+/* Cake Image */
+.cake {
+    width: 160px;
+    margin: 15px auto;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+    animation: float 2s infinite ease-in-out;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Typing Text */
+#text {
+    font-size: 2em;
+    color: #c2185b;
+    margin-top: 20px;
+    border-right: 3px solid;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* Button */
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    background: #c2185b;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* Confetti */
+.confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: white;
+    opacity: 0.7;
+    top: -10px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card">
+
+        <!-- Your Photo -->
+         <img class="photo" src="RAUNAK.jpg" alt="My Love">
+        <!-- Cake Image -->
+        <img class="cake"  src="CAKE.jpg"
+        <!-- Text -->
+        <div id="text"></div>
+
+        <!-- Button -->
+        <button onclick="toggleMusic()">🎵 Play / Pause</button>
+
+    </div>
+</div>
+
+<!-- Music -->
+<audio id="music" loop>
+    <source src="C:\Users\Raunak Kumar\Downloads\beatdreamer-happy-birthday-in-english-male-15023.mp3"
+</audio>
+
+<script>
+
+/* Typing */
+const message = "Happy Birthday Raunak ❤️";
+let i = 0;
+
+function typeWriter() {
+    if (i < message.length) {
+        document.getElementById("text").innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeWriter, 100);
+    }
+}
+typeWriter();
+
+/* Music */
+const music = document.getElementById("music");
+
+function toggleMusic() {
+    music.paused ? music.play() : music.pause();
+}
+
+/* Confetti */
+function createConfetti() {
+    const c = document.createElement("div");
+    c.classList.add("confetti");
+    c.style.left = Math.random() * window.innerWidth + "px";
+    c.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    document.body.appendChild(c);
+
+    setTimeout(() => c.remove(), 5000);
+}
+
+setInterval(createConfetti, 200);
+
+</script>
+
+</body>
+</html>
